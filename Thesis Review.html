@@ -1,0 +1,1357 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Seminar Presenter Notes</title>
+  <style>
+    :root{
+      --bg: #0b1020;
+      --panel: rgba(255,255,255,.06);
+      --panel-2: rgba(255,255,255,.09);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --faint: rgba(255,255,255,.55);
+      --accent: #7dd3fc;
+      --accent-2: #a78bfa;
+      --danger: #fb7185;
+      --ok: #34d399;
+      --ring: rgba(125,211,252,.35);
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 16px;
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --base: 18px; /* JS adjusts */
+      --line: 1.55;
+    }
+    [data-theme="light"]{
+      --bg: #f6f7fb;
+      --panel: rgba(0,0,0,.04);
+      --panel-2: rgba(0,0,0,.06);
+      --text: rgba(0,0,0,.88);
+      --muted: rgba(0,0,0,.66);
+      --faint: rgba(0,0,0,.50);
+      --ring: rgba(14,165,233,.25);
+      --shadow: 0 18px 60px rgba(0,0,0,.14);
+    }
+
+    *{ box-sizing: border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(125,211,252,.18), transparent 60%),
+        radial-gradient(1200px 800px at 90% 30%, rgba(167,139,250,.16), transparent 65%),
+        radial-gradient(900px 700px at 50% 95%, rgba(52,211,153,.08), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: var(--base);
+      line-height: var(--line);
+      overflow:hidden;
+    }
+
+    .app{
+      height: 100%;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 14px;
+      padding: 14px;
+    }
+
+    .sidebar, .main{
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .sidebar{
+      display:flex;
+      flex-direction: column;
+      min-width: 280px;
+    }
+
+    .sideTop{
+      padding: 14px 14px 10px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.09);
+      background: linear-gradient(to bottom, rgba(255,255,255,.06), transparent);
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .dot{
+      width: 10px; height: 10px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 0 4px var(--ring);
+      flex: 0 0 auto;
+    }
+
+    .sub{
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: .92em;
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .controls{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .control{
+      background: var(--panel-2);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 12px;
+      padding: 10px;
+      display:flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 74px;
+    }
+
+    .control label{
+      color: var(--muted);
+      font-size: .82em;
+    }
+
+    .row{ display:flex; gap:8px; align-items:center; flex-wrap: wrap; }
+
+    input[type="search"]{
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      padding: 10px 12px;
+      outline: none;
+      font-size: .95em;
+    }
+    [data-theme="light"] input[type="search"]{ background: rgba(255,255,255,.8); }
+
+    .btn{
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding: 9px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 650;
+      letter-spacing: .1px;
+      transition: transform .06s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn:hover{ background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.18); }
+    .btn.small{ padding: 7px 9px; border-radius: 11px; font-weight: 600; }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(125,211,252,.22), rgba(167,139,250,.18));
+      border-color: rgba(125,211,252,.28);
+    }
+    .btn.danger{
+      background: rgba(251,113,133,.12);
+      border-color: rgba(251,113,133,.22);
+    }
+
+    .list{
+      padding: 10px;
+      overflow: auto;
+    }
+
+    .item{
+      padding: 10px 10px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display:flex;
+      gap:10px;
+      align-items: flex-start;
+      transition: background .15s ease, border-color .15s ease;
+      margin-bottom: 8px;
+    }
+    .item:hover{ background: rgba(255,255,255,.06); }
+    .item.active{
+      background: linear-gradient(135deg, rgba(125,211,252,.12), rgba(167,139,250,.10));
+      border-color: rgba(125,211,252,.28);
+    }
+
+    .badge{
+      width: 26px;
+      height: 26px;
+      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family: var(--mono);
+      font-size: .78em;
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      flex: 0 0 auto;
+      margin-top: 1px;
+    }
+    .meta{ min-width: 0; }
+    .title{
+      font-weight: 750;
+      letter-spacing: .1px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hint{
+      color: var(--muted);
+      font-size: .86em;
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .main{
+      display:flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .topbar{
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.09);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.06), transparent);
+    }
+
+    .topbarLeft{
+      display:flex;
+      align-items: baseline;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .slideTitle{
+      font-weight: 800;
+      letter-spacing: .15px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 52vw;
+    }
+
+    .counter{
+      color: var(--muted);
+      font-size: .9em;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      font-family: var(--mono);
+    }
+
+    .topbarRight{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .content{
+      overflow: auto;
+      padding: 18px 18px 26px 18px;
+    }
+
+    .card{
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding: 16px 16px;
+      margin-bottom: 14px;
+    }
+
+    .kicker{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .kicker .left{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      flex-wrap: wrap;
+    }
+
+    .pill{
+      font-size: .82em;
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .pill.ok{ border-color: rgba(52,211,153,.22); background: rgba(52,211,153,.08); }
+    .pill.warn{ border-color: rgba(251,191,36,.22); background: rgba(251,191,36,.08); }
+    .pill.note{ border-color: rgba(125,211,252,.22); background: rgba(125,211,252,.08); }
+
+    .text p{ margin: 0 0 12px 0; }
+    .text p:last-child{ margin-bottom: 0; }
+    .text ul{ margin: 10px 0 0 1.15em; padding: 0; }
+    .text li{ margin: 6px 0; }
+    .muted{ color: var(--muted); }
+
+    .kbd{
+      font-family: var(--mono);
+      font-size: .86em;
+      padding: 2px 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .toast{
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      max-width: 520px;
+      background: rgba(0,0,0,.45);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow);
+      color: var(--text);
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+      backdrop-filter: blur(8px);
+      font-size: .95em;
+    }
+    [data-theme="light"] .toast{ background: rgba(255,255,255,.72); }
+    .toast.show{ opacity: 1; transform: translateY(0); }
+
+    /* Navigation hidden (single pane) */
+    body.navHidden .app{ grid-template-columns: 1fr; }
+    body.navHidden .sidebar{ display:none; }
+
+    /* Teleprompter mode: calmer UI */
+    body.teleprompter .topbar{ position: sticky; top:0; z-index: 5; }
+    body.teleprompter .content{ padding-top: 12px; }
+    body.teleprompter .card{ background: rgba(255,255,255,.04); }
+    body.teleprompter .slideTitle{ max-width: 70vw; }
+
+    @media (max-width: 980px){
+      .app{ grid-template-columns: 1fr; }
+      .sidebar{ display:none; }
+      body:not(.navHidden) .topbarRight .navHint{ display: inline-flex; }
+      .topbar .slideTitle{ max-width: 64vw; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app" id="app">
+    <aside class="sidebar" aria-label="Slide navigator">
+      <div class="sideTop">
+        <div class="brand"><span class="dot"></span>Seminar notes</div>
+        <div class="sub">
+          <span id="subInfo" class="muted">One-screen presenter view</span>
+          <span class="muted"><span class="kbd">↑</span> <span class="kbd">↓</span> to move</span>
+        </div>
+
+        <div class="controls">
+          <div class="control">
+            <label for="search">Search</label>
+            <input id="search" type="search" placeholder="Find a word or slide title…" />
+          </div>
+          <div class="control">
+            <label>Quick controls</label>
+            <div class="row">
+              <button class="btn small" id="fontDown" title="Smaller text">A-</button>
+              <button class="btn small" id="fontUp" title="Larger text">A+</button>
+              <button class="btn small" id="themeToggle" title="Toggle theme">Theme</button>
+            </div>
+            <div class="row">
+              <button class="btn small" id="navToggleSide" title="Show or hide navigation">Navigation</button>
+              <button class="btn small" id="autoScrollToggle" title="Toggle teleprompter auto-scroll">Scroll</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="list" id="list" role="listbox" aria-label="Slides list"></div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="topbarLeft">
+          <div class="slideTitle" id="slideTitle">Slide</div>
+          <div class="counter" id="counter">1 / 1</div>
+        </div>
+
+        <div class="topbarRight">
+          <button class="btn small navHint" id="navToggleTop" title="Show or hide navigation (N)">Navigation</button>
+          <button class="btn small" id="prevBtn" title="Previous slide (↑)">Prev</button>
+          <button class="btn small primary" id="nextBtn" title="Next slide (↓)">Next</button>
+          <button class="btn small" id="markBtn" title="Mark slide as done (D)">Done</button>
+          <button class="btn small" id="defaultsBtn" title="Restore default view settings (keeps progress)">Defaults</button>
+          <button class="btn small danger" id="resetBtn" title="Reset progress (local only)">Reset</button>
+          <span class="pill note" id="statusPill">Ready</span>
+        </div>
+      </div>
+
+      <div class="content" id="content" tabindex="0" aria-label="Slide notes"></div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* =========================
+       Data: updated seminar script
+       ========================= */
+    const slides = [
+      {
+        title: "Acknowledgement of Country",
+        tags: ["Introduction"],
+        notes: [
+          "Good afternoon everyone, the University of Queensland (UQ) acknowledges the Traditional Owners and their custodianship of the lands on which we meet.",
+          "We pay our respects to their Ancestors and their descendants, who continue cultural and spiritual connections to Country.",
+          "And we recognise their valuable contributions to Australian and global society."
+        ]
+      },
+      {
+        title: "Thanks",
+        tags: ["Introduction"],
+        notes: [
+          "Before I begin I would like thank you to my supervisory team, Dan, Michael, Nicola, and Steve, the review panel Hannah, Shuichi and Gerard, and any guests for attending my thesis review seminar today."
+        ]
+      },
+      {
+        title: "Birthday anecdote (1992)",
+        tags: ["Introduction"],
+        notes: [
+          "Believe it or not, on my birthday in 1992, clozapine was approved for use in Australia, and so it was written in the stars that my thesis would be about clozapine.",
+          "On that fateful day, a prophecy was made: neither can truly live while the other survives.",
+          "Today I am here to proudly present to you that I have survived my PhD journey, and they now call me the boy who lived."
+        ]
+      },
+      {
+        title: "Thesis title and question",
+        tags: ["Overview"],
+        notes: [
+          "My thesis is titled The quality and safe use of clozapine.",
+          "This thesis was conducted with the school of medicine, but I am a clinical pharmacist, and so from that perspective the thesis aims to answer the question of how we can deliver clozapine’s unique benefits for treatment-resistant schizophrenia while reducing preventable harm from adverse drug reactions."
+        ]
+      },
+      {
+        title: "Thesis structure",
+        tags: ["Overview"],
+        notes: [
+          "This thesis is divided into 7 chapters that I will present to you today.",
+          "Chapter 1 is a literature review on the pharmacotherapeutic treatments of schizophrenia."
+        ],
+        bullets: [
+          "Chapter 1: Schizophrenia pharmacotherapy overview",
+          "Chapter 2: Mapping clozapine adverse drug reactions (ADRs)",
+          "Chapters 3 and 4: Focused systematic reviews (urinary symptoms, hypotension)",
+          "Chapter 5: QT assessment and measurement artefact",
+          "Chapter 6: Real-world outpatient burden and modifiable drivers",
+          "Chapter 7: Integrative discussion, service model, future directions"
+        ]
+      },
+      {
+        title: "Chapter 1: chlorpromazine and EPS",
+        tags: ["Chapter 1"],
+        notes: [
+          "So today pharmacotherapy is essential in the management in schizophrenia.",
+          "The first antipsychotic, chlorpromazine, was discovered in the 1950s and was instrumental in the de-institutionalisation of many patients with severe mental illness.",
+          "It was the first medicine of its kind in reducing psychotic symptoms, and its efficacy was eventually linked to blocking dopamine receptors.",
+          "However, due to this dopaminergic blockade, chlorpromazine and other first generation antipsychotics are associated with extrapyramidal movement disorders (EPSE).",
+          "So although it was effective, once we hit the 1970s a strong preference for drugs that did not cause EPS developed, and this began with the discovery of a drug called clozapine."
+        ]
+      },
+      {
+        title: "Clozapine and the second generation",
+        tags: ["Chapter 1"],
+        notes: [
+          "Clozapine was discovered while searching for antidepressant compounds and was initially thought to be a failure because rather than make mice happy or dystonic, it just made them very sleepy instead.",
+          "The reason for this is that clozapine was found to have very limited affinity for D2 receptors.",
+          "It was effective though, and so clozapine inspired a second generation of antipsychotics which are widely used today, and have a wider therapeutic window, whereby they can reduce psychotic symptoms at doses that do not cause EPS.",
+          "However, as time went on, it became apparent that these second generation antipsychotics also carry many troublesome adverse events."
+        ]
+      },
+      {
+        title: "Balancing risk, response, and adherence",
+        tags: ["Chapter 1"],
+        notes: [
+          "Due to wide variation in receptor affinities, each antipsychotic has a unique therapeutic action and a unique adverse event profile.",
+          "So the choice of antipsychotic is based upon the person’s response to therapy and risk of adverse events.",
+          "Most antipsychotics, first or second generation, are reasonably effective, and the most important factor that drives successful treatment is adherence.",
+          "So the most effective antipsychotic is generally one that the patient continues to take.",
+          "Good pharmacotherapy is a balance of risk and response: if we are able to better manage harms, patients can stay on uninterrupted effective therapy and have better outcomes."
+        ]
+      },
+      {
+        title: "Treatment resistance",
+        tags: ["Context"],
+        notes: [
+          "However, despite these effective medicines, around one third of people with schizophrenia do not respond to antipsychotics, and have treatment-resistance.",
+          "Patients with treatment resistance have up to 11-fold higher total health resource and hospitalisation costs, a markedly reduced quality of life, and an increased risk of mortality and suicidality."
+        ]
+      },
+      {
+        title: "Why clozapine matters (and underuse)",
+        tags: ["Context"],
+        notes: [
+          "And this is where clozapine becomes an essential therapy.",
+          "Almost 70 years since the discovery of its unusual action, clozapine remains the only antipsychotic with established superiority for treatment-resistant schizophrenia and should be offered once treatment resistance is diagnosed.",
+          "It is also the only antipsychotic which has shown a reduction in suicidality and mortality in long-term observational data.",
+          "However, clozapine’s real-world impact is constrained by underuse.",
+          "Unfortunately only around one third of patients who meet criteria for treatment-resistant schizophrenia receive clozapine, and for many initiating clozapine is delayed."
+        ]
+      },
+      {
+        title: "ADRs: the core barrier (intro)",
+        tags: ["Context"],
+        notes: [
+          "A core reason for this is the complexity of clozapine’s adverse drug reaction profile.",
+          "Because of clozapine’s remarkably diverse affinity for different receptors in the body and the brain, we don’t really know which mechanisms produce its benefits, and the price we pay is a long list of unwanted side effects."
+        ]
+      },
+      {
+        title: "ADRs: burden and discontinuation",
+        tags: ["Context"],
+        notes: [
+          "Clozapine is linked to rare but serious complications such as haematological and inflammatory events, alongside frequent and burdensome reactions such as metabolic syndrome, gastrointestinal hypomotility and constipation, tachycardia, sedation, sialorrhoea, urinary incontinence, and orthostatic hypotension and dizziness, and many other uncommon but potentially significant adverse events.",
+          "Many of these reactions are manageable, but only if they are proactively identified and systematically addressed.",
+          "Discontinuation rates of clozapine remain high, around one third of patients discontinue within the first few years, and adverse drug reactions are consistently the most common reason for discontinuation."
+        ]
+      },
+      {
+        title: "Clinical context and next step",
+        tags: ["Overview"],
+        notes: [
+          "This overview of Chapter 1 is the clinical context for this thesis: we have a uniquely effective medicine for a high-need group that is underused, and its use is limited not primarily by efficacy, but by safety concerns, monitoring burdens, and uncertainty about how best to prevent and manage adverse effects in routine care.",
+          "So the next step was to systematically map all of the existing evidence for clozapine’s adverse drug reactions and identify important gaps."
+        ]
+      },
+      {
+        title: "Chapter 2: monster review (publication)",
+        tags: ["Chapter 2"],
+        notes: [
+          "To achieve this aim, in Chapter 2 I undertook a monster review of clozapine’s adverse events.",
+          "This review was published in Expert Opinion on Drug Safety."
+        ]
+      },
+      {
+        title: "Chapter 2: approach",
+        tags: ["Chapter 2"],
+        notes: [
+          "Chapter 2 is a narrative review of systematic reviews and meta-analyses, designed to bring a scattered and sometimes inconsistent safety literature into one practical summary and framework for clinicians.",
+          "We conducted a systematic search across major databases for secondary literature on clozapine’s ADRs, and in the absence of secondary literature for some adverse events, we also looked at primary literature."
+        ]
+      },
+      {
+        title: "Chapter 2: what we summarised",
+        tags: ["Chapter 2"],
+        notes: [
+          "Collectively, this review covered 30 distinct clozapine adverse drug reactions.",
+          "We presented evidence for prevalence, typical onset, any relationship with plasma concentration, management options in the literature (pharmacological and non-pharmacological), and key management notes.",
+          "We also graded the quality of evidence and the certainty of recommendations for pharmacological options using the GRADE criteria.",
+          "So here on the slides is the summarised framework which I will flick through quickly as I talk."
+        ]
+      },
+      {
+        title: "Chapter 2: three key messages",
+        tags: ["Chapter 2"],
+        notes: [
+          "There were three key messages arising from this large review.",
+          "First, the evidence base for clozapine’s ADRs is uneven. Incidence and prevalence literature are generally described better than management strategies. Most studies were low certainty and relied heavily on case reports and small case series. This shows that many monitoring and management recommendations are still consensus-led rather than evidence-based.",
+          "Second, there are some domains where evidence is stronger, and there are pragmatic strategies in place. The chapter synthesises approaches such as structured haematological surveillance for neutropenia, troponin and CRP monitoring for myocarditis, metformin and GLP-1 receptor agonists for clozapine-related metabolic harm, and proactive bowel regimens such as the Porirua protocol.",
+          "Third, and importantly, the chapter identifies the gaps that shape the rest of the thesis. Several common, functionally impairing problems, including urinary incontinence, orthostatic hypotension and dizziness, persistent tachycardia, and the associated complexity of QT assessment, remain informed by low quality literature and are under-described and under-measured.",
+          "Finally, the review identified highly variable and heterogeneous estimates of prevalence between different studies and study designs, primarily due to methodological differences in how we ascertain and measure ADRs. We found that the burden of ADRs in real-world practice is often undermeasured without standardised tools."
+        ],
+        bullets: [
+          "Uneven evidence: management strategies often low certainty",
+          "Some strong areas: practical monitoring and management strategies exist",
+          "Major gaps: common, impairing ADRs under-described and under-measured",
+          "Measurement matters: heterogeneous methods drive prevalence variability"
+        ]
+      },
+      {
+        title: "Bridge to the remaining chapters",
+        tags: ["Overview"],
+        notes: [
+          "So this review bridges Chapter 1 and the later empirical chapters, by clarifying what is known, what is uncertain, and where better research is needed to support safe clozapine use.",
+          "This informs the subsequent aims of the thesis and the remaining chapters."
+        ]
+      },
+      {
+        title: "Chapters 3 and 4: targeted evidence gaps",
+        tags: ["Chapters 3-4"],
+        notes: [
+          "The first are Chapters 3 and 4, which I will discuss together.",
+          "These chapters take the evidence gaps identified in Chapter 2 for urinary incontinence and hypotension and tackle them directly with two focused systematic reviews.",
+          "These domains were chosen because they are common, under-recognised in routine care, and highly likely to drive patient dissatisfaction, non-adherence, dose reductions, or discontinuation."
+        ]
+      },
+      {
+        title: "Chapters 3 and 4: publications",
+        tags: ["Chapters 3-4"],
+        notes: [
+          "The review on nocturnal enuresis and urinary incontinence was published in CNS Spectrums.",
+          "The review on hypotension was published in Therapeutic Advances in Psychopharmacology."
+        ]
+      },
+      {
+        title: "Chapter 3: evidence base",
+        tags: ["Chapter 3"],
+        notes: [
+          "Chapter 3 focuses on clozapine-associated nocturnal enuresis and urinary incontinence.",
+          "We included 22 publications in this systematic review, all were case reports or case series, describing 74 individual patients.",
+          "The key finding was that the evidence is low quality, but clinically useful patterns did emerge."
+        ]
+      },
+      {
+        title: "Chapter 3: management framework",
+        tags: ["Chapter 3"],
+        notes: [
+          "We developed a pragmatic management framework from this evidence to guide clinicians.",
+          "For urinary incontinence, non-pharmacological strategies are important but are often insufficient on their own.",
+          "The most consistently reported pharmacological benefit was with aripiprazole and desmopressin.",
+          "Anticholinergic agents are effective but may exacerbate constipation and so could be used in selected cases.",
+          "Because this is a stigmatised adverse reaction, a core practical message of this chapter is to ask about it proactively, rule out contributory medical causes, and manage it proactively rather than defaulting to stopping clozapine."
+        ]
+      },
+      {
+        title: "Chapter 4: evidence base",
+        tags: ["Chapter 4"],
+        notes: [
+          "Chapter 4 then applies the same approach to orthostatic hypotension and dizziness.",
+          "This review identified 13 eligible studies, again only case reports and small case series, describing 15 patients."
+        ]
+      },
+      {
+        title: "Chapter 4: management framework",
+        tags: ["Chapter 4"],
+        notes: [
+          "We also presented a pragmatic management framework.",
+          "The key message is that first-line management is usually about doing the basics well: identify reversible contributors, review other hypotensive medicines, optimise hydration and salt intake, and slow the titration or temporarily step back to the last tolerated dose if needed.",
+          "Where symptoms persist and threaten treatment continuation, the main pharmacological options reported were fludrocortisone and midodrine."
+        ]
+      },
+      {
+        title: "Chapter 4: perioperative and critical care finding",
+        tags: ["Chapter 4"],
+        notes: [
+          "An unexpected but important finding from this review was several perioperative and critical care cases where clozapine was found to blunt response to vasopressors and in some cases produced a paradoxical hypotensive crisis in response to adrenaline use.",
+          "It is often recommended in critical care guidelines to avoid using adrenaline with other strong alpha blockers like quetiapine and tricyclic antidepressants, but clozapine is rarely mentioned as one medicine of concern, so perhaps it should be included."
+        ]
+      },
+      {
+        title: "Impact: Maudsley guidelines",
+        tags: ["Milestone"],
+        notes: [
+          "Both of these reviews and their recommendations in Chapters 3 and 4 were cited in the latest Maudsley guidelines that just came out a few months ago.",
+          "Which is a particularly cool outcome of this PhD."
+        ]
+      },
+      {
+        title: "Chapters 3 and 4: takeaway",
+        tags: ["Chapters 3-4"],
+        notes: [
+          "Together, Chapters 3 and 4 convert a scattered case-based literature into two pragmatic management frameworks that help clinicians address these adverse reactions systematically, with the goal of improving tolerability while preserving clozapine’s unique therapeutic benefits."
+        ]
+      },
+      {
+        title: "Transition to Chapter 5",
+        tags: ["Transition"],
+        notes: [
+          "Chapters 3 and 4 have focused on adverse drug reactions that patients experience directly and often report as day-to-day problems.",
+          "The emphasis there is on recognising symptoms early, using a structured approach, and having practical management options so that clozapine is not reduced or stopped unnecessarily."
+        ]
+      },
+      {
+        title: "Chapter 5: QT prolongation (the problem)",
+        tags: ["Chapter 5"],
+        notes: [
+          "Chapter 5 shifts to a different kind of problem.",
+          "In the large review from Chapter 2, we identified that many studies have been published finding an association between clozapine plasma levels and QT prolongation, but there is an absence of evidence that clozapine ever causes dangerous arrhythmias, even in overdose.",
+          "QT prolongation sits in a different conceptual space to those earlier adverse effects.",
+          "It is not usually experienced as a symptom by patients, but it carries a lot of weight in clinician decision making because it is treated as a surrogate marker for serious arrhythmia and sudden death.",
+          "So in practice, a long QTc on an automated ECG report can trigger dose reductions, cardiology referrals, avoidance of combination treatment, and sometimes abrupt interruption or cessation of clozapine, even when the patient feels well and even in the absence of empirical evidence that clozapine is torsadogenic."
+        ]
+      },
+      {
+        title: "Chapter 5: the key measurement issue",
+        tags: ["Chapter 5"],
+        notes: [
+          "The key issue is, in a nutshell, that clozapine commonly causes sinus tachycardia, particularly during initiation and titration, and the QT interval is heart rate dependent.",
+          "Traditionally Bazett correction formula is used, and we know that Bazett’s formula performs poorly when heart rate is high, and so in patients with tachycardia it systematically overestimates the QTc.",
+          "That creates a bias towards overdetecting QT prolongation in clozapine-treated people."
+        ]
+      },
+      {
+        title: "Chapter 5: study question and methods",
+        tags: ["Chapter 5"],
+        notes: [
+          "So the purpose of Chapter 5 was to test a very practical question: are we mistaking a measurement artefact, driven by tachycardia and Bazett correction, for true clozapine-associated QT prolongation?",
+          "The study was published in Schizophrenia Bulletin and re-evaluated QT changes in a large retrospective inpatient cohort using methods that explicitly address those measurement issues: manual QT measurement, multiple heart rate correction formulae, and the QT nomogram, with ECGs linked to contemporaneous clozapine plasma concentrations."
+        ]
+      },
+      {
+        title: "Chapter 5: findings and interpretation",
+        tags: ["Chapter 5"],
+        notes: [
+          "What we found was firstly, we were able to recreate the association between Bazett-corrected QT intervals and clozapine plasma levels that has been reported in other studies.",
+          "However, when heart rate is accounted for in models, and when you use any other formula other than Bazett’s formula, any apparent association between clozapine plasma concentration and QT prolongation disappears.",
+          "We found in our models that the association with Bazett’s formula was almost entirely driven by heart rate.",
+          "In our cohort of 320 patients, despite almost 30% of patients being over the threshold for QT prolongation using Bazett’s formula, only one met the threshold for being at risk using the QT nomogram and using alternative formulae.",
+          "That patient was this little triangle above the line, and this patient had critically low potassium levels after an overdose of clozapine, amisulpride, and escitalopram. So it is very unlikely that clozapine was the causative factor.",
+          "If anything, the tachycardia induced by clozapine overdose is probably protecting him from torsades."
+        ],
+        bullets: [
+          "Bazett can over-call QTc in tachycardia",
+          "When heart rate is handled properly, the signal disappears",
+          "Use alternative formulae or the QT nomogram for a more sensible risk assessment"
+        ]
+      },
+      {
+        title: "Chapter 5: practical guide and broader work",
+        tags: ["Chapter 5"],
+        notes: [
+          "Arising from this chapter, we also presented a recommended guide to assessing clozapine-associated QT prolongation that clinicians can pin up on the wall.",
+          "This approach is also informed by another body of research that I was conducting during my PhD, that I probably shouldn’t have done and should have focused on my PhD instead, but regardless this was similar research looking at all antipsychotics with similar methods to this chapter.",
+          "This has also been cited in the latest Maudsley guidelines, and the QT recommendations in the latest Maudsley guidelines reflect this work and are much more sensible.",
+          "So that is another outcome I’m proud of from our research during this PhD."
+        ]
+      },
+      {
+        title: "Transition to Chapter 6",
+        tags: ["Transition"],
+        notes: [
+          "Finally, I will move onto the last chapter of the thesis.",
+          "The earlier chapters show two related problems that are relevant for this chapter.",
+          "First, some clozapine adverse drug reactions are under-recognised, particularly when services rely on unstructured questioning or patients volunteering symptoms.",
+          "Secondly, some risks can be misinterpreted or overestimated because of how we measure them.",
+          "So the final and very practical question to answer in this thesis is: in a stable outpatient clozapine clinic, what is the day-to-day burden of adverse effects when we assess them systematically, and what modifiable prescribing and service factors are linked to that burden?"
+        ]
+      },
+      {
+        title: "Chapter 6: real-world cohort",
+        tags: ["Chapter 6"],
+        notes: [
+          "Chapter 6 is the final empirical chapter, and it addresses that question using a real-world clozapine service cohort."
+        ]
+      },
+      {
+        title: "Chapter 6: publication and design",
+        tags: ["Chapter 6"],
+        notes: [
+          "This study was published in ANZJP.",
+          "We conducted a retrospective cross-sectional analysis of 360 adults attending a specialist clozapine outpatient clinic over a 4-year period, all on maintenance clozapine beyond the early initiation phase."
+        ]
+      },
+      {
+        title: "Chapter 6: measurements and data",
+        tags: ["Chapter 6"],
+        notes: [
+          "At the clinic visit, adverse effects were captured using this structured questionnaire for key patient-reported problems, alongside objective clinical markers such as resting heart rate, orthostatic blood pressure change, and metabolic syndrome criteria.",
+          "We looked at clozapine dose, plasma concentrations, smoking status, and included very detailed reporting of concomitant medicines, including medicines being used prophylactically or symptomatically for adverse effects."
+        ]
+      },
+      {
+        title: "Chapter 6: key findings",
+        tags: ["Chapter 6"],
+        notes: [
+          "The first finding is that when you measure adverse events systematically, the burden is very high: roughly 90% of patients had at least one current symptomatic adverse drug reaction during their clinic visit.",
+          "The most frequent were metabolic syndrome, sialorrhoea, and tachycardia, each affecting more than half of the cohort.",
+          "These prevalence rates are generally higher than what we found in the literature in our large review of clozapine ADRs, but are in line with other studies that use proactive and systematic detection.",
+          "Some ADRs were lower than reported prevalence in the literature, such as constipation, and that is because the proactive use of aperients in this service was high and was effective at reducing symptomatic burden.",
+          "Secondly, antipsychotic augmentation was common: more than 50% were receiving an additional antipsychotic other than clozapine, and augmentation was independently associated with substantially higher adverse effect burden.",
+          "Thirdly, smoking stood out as a key upstream driver: smokers were prescribed higher clozapine doses but still had lower plasma concentrations and were 2.5 times more likely to be given a second antipsychotic.",
+          "This points to a pattern of smoking causing CYP1A2 induction, lowering clozapine plasma levels, incomplete dose optimisation for this induction, which may be interpreted as treatment resistance, leading to antipsychotic polypharmacy and subsequently additive adverse effects."
+        ]
+      },
+      {
+        title: "Smoking: interpreting the pattern",
+        tags: ["Implications"],
+        notes: [
+          "We already know that smokers tend to have a higher ADR burden, and it is widely assumed that this is because they require higher doses of clozapine.",
+          "However, other studies have found that counterintuitively, smokers seem to experience ADRs at lower average doses than people who do not smoke.",
+          "These studies did not systematically record concomitant antipsychotics.",
+          "So we can’t prove this with our retrospective data, but our study suggests that it is plausible that due to incomplete dose compensation, smokers are more likely to be treated as treatment resistant, and be prescribed additional antipsychotics, and it may be the additional antipsychotics that are driving the higher rate of ADRs and ADRs occurring at lower clozapine doses in smokers."
+        ]
+      },
+      {
+        title: "Smoking: guidance",
+        tags: ["Implications"],
+        notes: [
+          "The guidance is to offer smoking cessation, and if that is not a plausible option, smokers in many cases may require higher clozapine doses than is typically assumed with intuition.",
+          "Our study found that smokers and non smokers have similar dose response curves, but for any given dose, smokers’ plasma concentrations are around 30% lower.",
+          "Which means smokers may require around 50% higher doses or more to adequately compensate for this induction."
+        ],
+        bullets: [
+          "Offer cessation support where possible",
+          "If smoking continues: optimise dose using plasma levels",
+          "Avoid unnecessary augmentation where possible"
+        ]
+      },
+      {
+        title: "Chapter 7: integrative discussion",
+        tags: ["Discussion"],
+        notes: [
+          "In the final integrative discussion chapter of the thesis, I draw all of the earlier chapters into one argument that clozapine is uniquely effective in treatment-resistant schizophrenia, but its real-world impact is constrained by how adverse drug reactions are detected, interpreted, and managed within services.",
+          "From this body of work, the discussion chapter proposes a practical service model for optimising long-term clozapine care that uses structured adverse event surveillance, proactive therapeutic drug monitoring, optimisation of dose, and proactive ADR management before consideration of antipsychotic augmentation."
+        ]
+      },
+      {
+        title: "Future directions: priorities for research and services",
+        tags: ["Discussion"],
+        notes: [
+          "Looking ahead, to achieve this, the priority is research that measurably improves the quality and safety of routine clozapine care.",
+          "First, we need to standardise how adverse drug reactions are measured and reported, including patient-reported burden and severity.",
+          "We need pragmatic, clinic-embedded trials of protocolised, stepwise management pathways for the high-burden adverse effects that most often drive discontinuation, such as dizziness, urinary symptoms, sedation, sialorrhoea, tachycardia, and metabolic harms.",
+          "Third, reducing monitoring burden matters for access, so point-of-care blood testing, more actionable TDM, and integrated digital systems should be evaluated for acceptability and real-world impact.",
+          "Finally, we need more precise strategies for serious adverse effects, and better research on avoidable cessation, including how clinicians interpret borderline risk markers and how tapering and substitution can be done safely."
+        ],
+        bullets: [
+          "Standardise ADR measurement (including patient-reported burden)",
+          "Pragmatic trials of stepwise management pathways",
+          "Reduce monitoring burden (point-of-care, actionable TDM, digital systems)",
+          "Better strategies for serious AEs and avoidable cessation"
+        ]
+      },
+      {
+        title: "Timelines and milestones",
+        tags: ["Timeline"],
+        notes: [
+          "Thesis Review February 13th.",
+          "Need to incorporate reader feedback.",
+          "Send to supervisory team for second review.",
+          "Submit thesis by March 31st.",
+          "Aiming for thesis resubmission and defence around June to September.",
+          "Graduate December."
+        ]
+      },
+      {
+        title: "After the PhD: clinical leadership",
+        tags: ["Career"],
+        notes: [
+          "A lot of the things I wanted to achieve after my PhD I managed to achieve during my PhD, which is nice but also definitely contributed to me taking the maximum allowable time to complete my PhD.",
+          "Around the time I began my PhD I started working as the team leader of mental health pharmacy at PAH. I’m still doing that job now, I still really enjoy that job and find a lot of reward in having clinical contact with patients and leading a team of pharmacists.",
+          "The PhD and Dan’s guidance has really helped me find a clear professional voice as a clinician.",
+          "This is something that I am keen to continue doing for the foreseeable future. I still really enjoy clinical work and it is definitely very helpful in keeping my research and teaching relevant and useful for practice."
+        ]
+      },
+      {
+        title: "After the PhD: teaching and education",
+        tags: ["Career"],
+        notes: [
+          "Around the time I started my PhD I started working with the University of Queensland one day a week tutoring, and over the past 5 years I have gradually increased my teaching portfolio.",
+          "Now I am working 3 days a week at the university, where I course coordinate in the Masters of Pharmacy.",
+          "One subject I teach is evidence based medicine to Masters students, and the work that I have conducted in the large reviews, where I used the GRADE criteria to assess the certainty of evidence and strength of recommendations for practice, is now something that I teach and can pass on to clinicians doing postgraduate study.",
+          "I also teach mental health and men’s and women’s health, and I have been undertaking a bit of an overhaul of the mental health content in the other subject.",
+          "I really enjoy teaching and I’m quite keen to continue doing this for the next few years at least."
+        ]
+      },
+      {
+        title: "Clinical academic balance",
+        tags: ["Career"],
+        notes: [
+          "So I’m effectively working as a clinical academic currently: 3 days at the uni and 2 days at the PA Hospital.",
+          "I’m quite content to continue this arrangement for the near future, I find doing both very rewarding and I still feel I have a lot to improve on in both aspects."
+        ]
+      },
+      {
+        title: "Supervision and mentoring",
+        tags: ["Career"],
+        notes: [
+          "Over the past 5 years, I have supervised 7 pharmacy major students (4th year students undergoing year-long research projects), as well as around 10 shorter research projects supporting other students and pharmacists.",
+          "I’m also currently supervising a Master of Philosophy student from Sri Lanka who is a mental health pharmacist and is doing their degree from Sri Lanka with support from the University of Sydney.",
+          "So I already have a fairly strong supervision record, but I would like to now dip my toes in supervision of PhD students as a minor supervisor."
+        ]
+      },
+      {
+        title: "Skills: coding, statistics, and data science",
+        tags: ["Skills"],
+        notes: [
+          "Another reason my PhD took so damn long is I spent about a year learning how to code and use R and Python for data science.",
+          "I probably learned everything I needed to learn for my PhD in a month or two but I really wanted to obtain this skill as an outcome from my PhD so I learned how to do a lot more advanced statistics and coding.",
+          "I also completed a certificate in Python with the University of Michigan.",
+          "And I haven’t really had the chance to have a go at doing that yet with a real dataset.",
+          "There were some cool statistical models that I conducted in my empirical chapters like the mediation analysis in Chapter 5 and the dose response curves in Chapter 6.",
+          "We brought on Chloe Yap who has a biostats background in that chapter and I really enjoyed working with her on that. I would like to be involved in some more advanced stuff in the future.",
+          "The other thing is that hopefully learning this skill means that if I supervise projects in the future where I have a student who is really into coding and statistics, I’ll hopefully have a clue what they are talking about."
+        ]
+      },
+      {
+        title: "Research focus and a fun goal",
+        tags: ["Career"],
+        notes: [
+          "I do have other interests but I really feel that this field of research in schizophrenia and mental illness is extremely important and I really love working with Dan and Steve and Nicola and Michael.",
+          "So I am someone who finds interest in a broad range of things but I am very keen to continue primarily working with them as the focus of my research in the future.",
+          "Another minor but fun goal for me is that I enjoy learning languages and during my PhD I learned how to speak Spanish, so I really want to go to a conference either in Japan or a Spanish speaking country and deliver a presentation in either Japanese or Spanish."
+        ]
+      },
+      {
+        title: "Final thanks",
+        tags: ["Closing"],
+        notes: [
+          "Okay that is all.",
+          "I’d just like to say one last massive heartfelt thank you and acknowledgement to everyone who has assisted me with my PhD journey, in particular Shuichi, Hanna and Gerard for seeing me through all of my PhD milestones and Gerard for coming out of retirement for me to finish this off.",
+          "To my supervisors Michael, Steve and Nicola, thank you so very much for your ongoing support throughout the past 5 years.",
+          "And lastly Dan, you have been a transformative person in my life and I feel incredibly grateful to have met you and have you support me and guide me through this PhD."
+        ]
+      }
+    ];
+
+    /* =========================
+       App state
+       ========================= */
+    const els = {
+      list: document.getElementById("list"),
+      content: document.getElementById("content"),
+      slideTitle: document.getElementById("slideTitle"),
+      counter: document.getElementById("counter"),
+      search: document.getElementById("search"),
+      toast: document.getElementById("toast"),
+      statusPill: document.getElementById("statusPill"),
+      prevBtn: document.getElementById("prevBtn"),
+      nextBtn: document.getElementById("nextBtn"),
+      markBtn: document.getElementById("markBtn"),
+      resetBtn: document.getElementById("resetBtn"),
+      defaultsBtn: document.getElementById("defaultsBtn"),
+      fontUp: document.getElementById("fontUp"),
+      fontDown: document.getElementById("fontDown"),
+      themeToggle: document.getElementById("themeToggle"),
+      navToggleSide: document.getElementById("navToggleSide"),
+      navToggleTop: document.getElementById("navToggleTop"),
+      autoScrollToggle: document.getElementById("autoScrollToggle"),
+    };
+
+    const STORAGE_KEY = "seminarNotesState_v2";
+    const defaultState = {
+      index: 0,
+      done: {},               // { [slideIndex]: true }
+      font: 18,
+      theme: "dark",
+      navHidden: false,
+      autoScroll: false,
+      autoScrollSpeed: 22     // px/sec
+    };
+
+    let state = loadState();
+    let visibleIdx = slides.map((_, i) => i); // filtered indices
+
+    let autoScrollTimer = null;
+    let lastTick = null;
+
+    /* =========================
+       Helpers
+       ========================= */
+    function loadState(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if(!raw) return structuredClone(defaultState);
+        const parsed = JSON.parse(raw);
+        return { ...structuredClone(defaultState), ...parsed };
+      }catch{
+        return structuredClone(defaultState);
+      }
+    }
+
+    function saveState(){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function clamp(n, min, max){
+      return Math.max(min, Math.min(max, n));
+    }
+
+    function toast(msg){
+      els.toast.textContent = msg;
+      els.toast.classList.add("show");
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => els.toast.classList.remove("show"), 1500);
+    }
+
+    function setTheme(theme){
+      state.theme = theme === "light" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", state.theme);
+      saveState();
+    }
+
+    function setFont(px){
+      state.font = clamp(px, 14, 30);
+      document.documentElement.style.setProperty("--base", state.font + "px");
+      saveState();
+      els.statusPill.textContent = `Text: ${state.font}px`;
+      setTimeout(() => { els.statusPill.textContent = isDone(state.index) ? "Done" : "Ready"; }, 900);
+    }
+
+    function setNavHidden(on){
+      state.navHidden = !!on;
+      document.body.classList.toggle("navHidden", state.navHidden);
+      saveState();
+      toast(state.navHidden ? "Navigation hidden (press N to show)" : "Navigation shown");
+    }
+
+    function isDone(i){
+      return !!state.done[i];
+    }
+
+    function setAutoScroll(on){
+      state.autoScroll = !!on;
+      document.body.classList.toggle("teleprompter", state.autoScroll);
+      saveState();
+
+      if(state.autoScroll){
+        startAutoScroll();
+        els.statusPill.textContent = "Auto-scroll: ON";
+        els.autoScrollToggle.classList.add("primary");
+        toast("Auto-scroll on (use [ and ] to change speed)");
+      }else{
+        stopAutoScroll();
+        els.statusPill.textContent = isDone(state.index) ? "Done" : "Ready";
+        els.autoScrollToggle.classList.remove("primary");
+        toast("Auto-scroll off");
+      }
+    }
+
+    function startAutoScroll(){
+      stopAutoScroll();
+      lastTick = performance.now();
+      autoScrollTimer = requestAnimationFrame(tickScroll);
+    }
+
+    function stopAutoScroll(){
+      if(autoScrollTimer){
+        cancelAnimationFrame(autoScrollTimer);
+        autoScrollTimer = null;
+      }
+    }
+
+    function tickScroll(now){
+      const dt = (now - lastTick) / 1000;
+      lastTick = now;
+
+      const px = state.autoScrollSpeed * dt;
+      els.content.scrollTop += px;
+
+      autoScrollTimer = requestAnimationFrame(tickScroll);
+    }
+
+    function makeSnippet(slide){
+      const first = (slide.notes && slide.notes[0]) ? slide.notes[0] : "";
+      return first.length > 90 ? first.slice(0, 90).trim() + "…" : first;
+    }
+
+    function renderList(){
+      els.list.innerHTML = "";
+      visibleIdx.forEach((realIndex, pos) => {
+        const s = slides[realIndex];
+        const isActive = realIndex === state.index;
+        const done = isDone(realIndex);
+
+        const div = document.createElement("div");
+        div.className = "item" + (isActive ? " active" : "");
+        div.setAttribute("role", "option");
+        div.setAttribute("aria-selected", isActive ? "true" : "false");
+        div.dataset.index = realIndex;
+
+        const badge = document.createElement("div");
+        badge.className = "badge";
+        badge.textContent = String(pos + 1).padStart(2, "0");
+
+        const meta = document.createElement("div");
+        meta.className = "meta";
+
+        const title = document.createElement("div");
+        title.className = "title";
+        title.textContent = s.title;
+
+        const hint = document.createElement("div");
+        hint.className = "hint";
+        hint.textContent = (done ? "✓ Done · " : "") + makeSnippet(s);
+
+        meta.appendChild(title);
+        meta.appendChild(hint);
+
+        div.appendChild(badge);
+        div.appendChild(meta);
+
+        div.addEventListener("click", () => goTo(realIndex, { scrollTop: true }));
+        els.list.appendChild(div);
+      });
+    }
+
+    function renderContent(){
+      const s = slides[state.index];
+      els.slideTitle.textContent = s.title;
+
+      const position = visibleIdx.indexOf(state.index);
+      els.counter.textContent = `${position >= 0 ? (position + 1) : (state.index + 1)} / ${visibleIdx.length}`;
+
+      const done = isDone(state.index);
+      els.statusPill.textContent = done ? "Done" : "Ready";
+      els.statusPill.className = "pill " + (done ? "ok" : "note");
+
+      const wrapper = document.createElement("div");
+
+      const header = document.createElement("div");
+      header.className = "card";
+
+      const kicker = document.createElement("div");
+      kicker.className = "kicker";
+
+      const left = document.createElement("div");
+      left.className = "left";
+
+      const tagPill = document.createElement("span");
+      tagPill.className = "pill";
+      tagPill.textContent = (s.tags && s.tags.length) ? s.tags.join(" · ") : "Slide";
+
+      const help = document.createElement("span");
+      help.className = "pill";
+      help.innerHTML = `
+        Keys:
+        <span class="kbd">↑</span>/<span class="kbd">↓</span>
+        <span class="kbd">D</span> done
+        <span class="kbd">N</span> navigation
+        <span class="kbd">T</span> scroll
+        <span class="kbd">+</span>/<span class="kbd">-</span> text
+        <span class="kbd">/</span> search
+      `.trim();
+
+      left.appendChild(tagPill);
+      left.appendChild(help);
+
+      const right = document.createElement("div");
+      right.className = "pill " + (done ? "ok" : "warn");
+      right.textContent = done ? "Marked done" : "Not marked";
+
+      kicker.appendChild(left);
+      kicker.appendChild(right);
+
+      const text = document.createElement("div");
+      text.className = "text";
+
+      (s.notes || []).forEach(par => {
+        const p = document.createElement("p");
+        p.textContent = par;
+        text.appendChild(p);
+      });
+
+      if(s.bullets && s.bullets.length){
+        const ul = document.createElement("ul");
+        s.bullets.forEach(b => {
+          const li = document.createElement("li");
+          li.textContent = b;
+          ul.appendChild(li);
+        });
+        text.appendChild(ul);
+      }
+
+      header.appendChild(kicker);
+      header.appendChild(text);
+
+      const footer = document.createElement("div");
+      footer.className = "card";
+
+      const footerText = document.createElement("div");
+      footerText.className = "text muted";
+      footerText.innerHTML = `
+        Tips: press <span class="kbd">N</span> to show or hide navigation. Press <span class="kbd">T</span> for teleprompter auto-scroll.
+        Use <span class="kbd">[</span> and <span class="kbd">]</span> to adjust scroll speed.
+        Progress and settings save locally in your browser.
+      `.trim();
+
+      footer.appendChild(footerText);
+
+      wrapper.appendChild(header);
+      wrapper.appendChild(footer);
+
+      els.content.innerHTML = "";
+      els.content.appendChild(wrapper);
+    }
+
+    function applySearch(){
+      const q = (els.search.value || "").trim().toLowerCase();
+      if(!q){
+        visibleIdx = slides.map((_, i) => i);
+      }else{
+        visibleIdx = slides
+          .map((s, i) => ({ s, i }))
+          .filter(({ s }) => {
+            const hay = (s.title + " " + (s.tags || []).join(" ") + " " + (s.notes || []).join(" ") + " " + (s.bullets || []).join(" ")).toLowerCase();
+            return hay.includes(q);
+          })
+          .map(x => x.i);
+      }
+
+      if(!visibleIdx.includes(state.index) && visibleIdx.length){
+        state.index = visibleIdx[0];
+        saveState();
+      }
+
+      renderList();
+      renderContent();
+    }
+
+    function goTo(realIndex, opts = {}){
+      if(realIndex < 0 || realIndex >= slides.length) return;
+      state.index = realIndex;
+      saveState();
+      renderList();
+      renderContent();
+
+      if(opts.scrollTop){
+        els.content.scrollTop = 0;
+      }
+
+      const active = els.list.querySelector(`.item[data-index="${realIndex}"]`);
+      if(active) active.scrollIntoView({ block: "nearest" });
+    }
+
+    function next(){
+      const pos = visibleIdx.indexOf(state.index);
+      if(pos < 0) return;
+      const nextPos = clamp(pos + 1, 0, visibleIdx.length - 1);
+      goTo(visibleIdx[nextPos], { scrollTop: true });
+    }
+
+    function prev(){
+      const pos = visibleIdx.indexOf(state.index);
+      if(pos < 0) return;
+      const prevPos = clamp(pos - 1, 0, visibleIdx.length - 1);
+      goTo(visibleIdx[prevPos], { scrollTop: true });
+    }
+
+    function toggleDone(){
+      const i = state.index;
+      state.done[i] = !state.done[i];
+      saveState();
+      renderList();
+      renderContent();
+      toast(state.done[i] ? "Marked done" : "Marked not done");
+    }
+
+    function resetProgress(){
+      state.done = {};
+      saveState();
+      renderList();
+      renderContent();
+      toast("Progress reset");
+    }
+
+    function restoreDefaults(){
+      state.font = defaultState.font;
+      state.theme = defaultState.theme;
+      state.navHidden = defaultState.navHidden;
+      state.autoScroll = defaultState.autoScroll;
+      state.autoScrollSpeed = defaultState.autoScrollSpeed;
+
+      saveState();
+
+      setTheme(state.theme);
+      setFont(state.font);
+      setNavHidden(state.navHidden);
+      setAutoScroll(state.autoScroll);
+
+      renderList();
+      renderContent();
+      toast("View defaults restored");
+    }
+
+    /* =========================
+       Events
+       ========================= */
+    els.search.addEventListener("input", applySearch);
+
+    els.prevBtn.addEventListener("click", prev);
+    els.nextBtn.addEventListener("click", next);
+    els.markBtn.addEventListener("click", toggleDone);
+    els.resetBtn.addEventListener("click", resetProgress);
+
+    els.defaultsBtn.addEventListener("click", restoreDefaults);
+
+    els.fontUp.addEventListener("click", () => setFont(state.font + 1));
+    els.fontDown.addEventListener("click", () => setFont(state.font - 1));
+
+    els.themeToggle.addEventListener("click", () => {
+      setTheme(state.theme === "dark" ? "light" : "dark");
+      toast(state.theme === "dark" ? "Dark theme" : "Light theme");
+    });
+
+    function toggleNav(){
+      setNavHidden(!state.navHidden);
+    }
+    els.navToggleSide.addEventListener("click", toggleNav);
+    els.navToggleTop.addEventListener("click", toggleNav);
+
+    els.autoScrollToggle.addEventListener("click", () => setAutoScroll(!state.autoScroll));
+
+    document.addEventListener("keydown", (e) => {
+      const key = e.key.toLowerCase();
+
+      if(document.activeElement === els.search) return;
+
+      if(key === "arrowdown" || key === "j"){ e.preventDefault(); next(); }
+      if(key === "arrowup" || key === "k"){ e.preventDefault(); prev(); }
+
+      if(key === "d"){ e.preventDefault(); toggleDone(); }
+      if(key === "n"){ e.preventDefault(); toggleNav(); }
+      if(key === "t"){ e.preventDefault(); setAutoScroll(!state.autoScroll); }
+
+      if(key === "+" || key === "="){ e.preventDefault(); setFont(state.font + 1); }
+      if(key === "-" || key === "_"){ e.preventDefault(); setFont(state.font - 1); }
+
+      if(key === "[" && state.autoScroll){
+        state.autoScrollSpeed = clamp(state.autoScrollSpeed - 4, 8, 60);
+        saveState();
+        els.statusPill.textContent = `Scroll: ${state.autoScrollSpeed}px/s`;
+        toast(`Scroll speed: ${state.autoScrollSpeed}px/s`);
+      }
+      if(key === "]" && state.autoScroll){
+        state.autoScrollSpeed = clamp(state.autoScrollSpeed + 4, 8, 60);
+        saveState();
+        els.statusPill.textContent = `Scroll: ${state.autoScrollSpeed}px/s`;
+        toast(`Scroll speed: ${state.autoScrollSpeed}px/s`);
+      }
+
+      if(key === "/"){
+        e.preventDefault();
+        els.search.focus();
+      }
+    });
+
+    /* =========================
+       Init
+       ========================= */
+    setTheme(state.theme);
+    setFont(state.font);
+    setNavHidden(state.navHidden);
+    applySearch();
+    goTo(clamp(state.index, 0, slides.length - 1), { scrollTop: true });
+    if(state.autoScroll) setAutoScroll(true);
+  </script>
+</body>
+</html>
