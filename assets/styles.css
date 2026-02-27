@@ -1,13 +1,30 @@
 :root {
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.55;
+  line-height: 1.6;
   font-size: 16px;
+
+  --bg: #f7f7f7;
+  --text: #111;
+  --muted: rgba(0, 0, 0, 0.7);
+
+  --card: #ffffff;
+  --border: rgba(0, 0, 0, 0.12);
+
+  --header-bg: #111;
+  --header-text: #fff;
+
+  --shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background: #f7f7f7;
-  color: #111;
+  background: var(--bg);
+  color: var(--text);
 }
 
 .container {
@@ -17,8 +34,8 @@ body {
 }
 
 .site-header {
-  background: #111;
-  color: #fff;
+  background: var(--header-bg);
+  color: var(--header-text);
 }
 
 .site-header h1 {
@@ -34,41 +51,146 @@ body {
 
 .nav {
   display: flex;
-  flex-direction: column; /* this makes the links one per line */
+  flex-direction: column;
   align-items: flex-start;
-  gap: 0.5rem;
+  gap: 0.4rem;
   padding-bottom: 1rem;
 }
 
 .nav a {
-  color: #fff;
+  color: var(--header-text);
   text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-  padding: 0.15rem 0;
+  padding: 0.25rem 0.4rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .nav a:hover {
-  border-bottom-color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .nav a[aria-current="page"] {
-  border-bottom-color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+main {
+  padding-bottom: 2rem;
 }
 
 .card {
-  background: #fff;
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
   margin: 1rem 0;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
 }
 
 h2 {
-  margin-top: 0;
+  margin: 0 0 0.75rem 0;
   letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0.75rem 0;
+  color: var(--text);
+}
+
+ul, ol {
+  margin: 0.6rem 0 0.9rem 1.25rem;
+}
+
+li {
+  margin: 0.35rem 0;
+}
+
+a {
+  color: #0b57d0;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .footer {
   margin: 2rem 0 1rem 0;
-  opacity: 0.8;
+  color: var(--muted);
+}
+
+strong {
+  font-weight: 600;
+}
+
+/* Details blocks (expanders) */
+details {
+  margin: 0.85rem 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+}
+
+details[open] {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+summary {
+  cursor: pointer;
+  padding: 0.75rem 0.9rem;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::before {
+  content: "▸";
+  display: inline-block;
+  transform: translateY(-1px);
+  opacity: 0.85;
+}
+
+details[open] summary::before {
+  content: "▾";
+}
+
+details > *:not(summary) {
+  padding: 0.1rem 0.9rem 0.9rem 0.9rem;
+}
+
+/* Preformatted blocks (the worksheet templates) */
+pre {
+  margin: 0.75rem 0 0 0;
+  padding: 0.85rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #0f172a;
+  color: #f8fafc;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.45;
+  font-size: 0.95rem;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.95em;
+  background: rgba(0, 0, 0, 0.06);
+  padding: 0.15rem 0.3rem;
+  border-radius: 6px;
+}
+
+/* Make focus visible for keyboard users */
+a:focus, summary:focus {
+  outline: 3px solid rgba(11, 87, 208, 0.35);
+  outline-offset: 2px;
 }
