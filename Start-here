@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Interview Guide</title>
+
+  <!-- Nicer font (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Your site styling -->
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Interview Guide</h1>
+
+      <nav class="nav" aria-label="Guide navigation">
+        <a href="index.html" aria-current="page">Start here</a>
+        <a href="extracting-attributes.html">Extracting attributes</a>
+        <a href="building-examples.html">Building examples</a>
+        <a href="question-styles.html">Question styles</a>
+        <a href="bridging-examples.html">Bridging examples to questions</a>
+        <a href="scope-and-influence.html">Scope and influence</a>
+        <a href="after-the-interview.html">After the interview</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <p>
+        This is a personal set of notes on how to approach interviews for public hospital roles in Queensland,
+        especially early-career to mid-level health practitioner positions.
+        It focuses on preparation and answer structures that tend to hold up across different teams and sites.
+      </p>
+      <p>
+        It is designed to be practical. It is not a comprehensive guide to all possible questions, but it should give you a good foundation to build on. 
+      </p>
+    </section>
+
+    <section class="card">
+      <ul>
+        <li>It is not an official resource.</li>
+        <li>It is not endorsed by any hospital, service, or government organisation.</li>
+        <li>It is not a promise of outcomes, and it will not match every panel or every site.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
