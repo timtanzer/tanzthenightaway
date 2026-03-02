@@ -279,3 +279,57 @@ details.excerpt-drop .details-body {
 .excerpt ul {
   margin: 0.55rem 0 0.2rem 1.25rem;
 }
+
+/* Bubble buttons inside the dark header */
+.site-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.site-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-left: auto;
+  padding-top: 0.5rem;
+}
+
+.site-pills a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+  padding: 0.8rem 1.5rem;
+  border-radius: 999px;
+  border: 1.5px solid #cfd6e4;
+  background: #ffffff;
+  color: #334155;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.site-pills a:hover {
+  background: #f8fafc;
+  border-color: #bfc8d8;
+  text-decoration: none;
+}
+
+.site-pills a[aria-current="page"] {
+  background: #16213a;
+  color: #ffffff;
+  border-color: #16213a;
+}
+
+@media (max-width: 900px) {
+  .site-header-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-pills {
+    margin-left: 0;
+  }
+}
