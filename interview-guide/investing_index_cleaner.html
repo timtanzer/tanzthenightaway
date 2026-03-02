@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Notes on Financial Independence | tanzthenightaway</title>
+<meta content="Notes on financial independence with a clean contents list and step-by-step guidance." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../assets/styles.css" rel="stylesheet"/>
+<style>
+.investing-page {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f6f7fb;
+  color: #142033;
+  margin: 0;
+}
+
+.investing-page *,
+.investing-page *::before,
+.investing-page *::after {
+  box-sizing: border-box;
+}
+
+.investing-page a {
+  color: inherit;
+}
+
+.investing-shell {
+  width: min(860px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 18px 0 40px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0 18px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #142033;
+}
+
+.topnav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.topnav a {
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #dbe2ee;
+  color: #334155;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.topnav a:hover,
+.topnav a:focus-visible,
+.back-link a:hover,
+.back-link a:focus-visible {
+  transform: translateY(-1px);
+  border-color: #b8c4d8;
+  box-shadow: 0 10px 24px rgba(20, 32, 51, 0.08);
+  outline: none;
+}
+
+.topnav a[aria-current="page"] {
+  background: #142033;
+  border-color: #142033;
+  color: #ffffff;
+}
+
+.hero {
+  padding: 4px 0 0;
+  margin-bottom: 10px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(1.95rem, 4vw, 2.65rem);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  color: #0f172a;
+}
+
+.contents-card {
+  background: #ffffff;
+  border: 1px solid #dbe2ee;
+  border-radius: 18px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+}
+
+.contents-card h2 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.contents-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.contents-list li + li {
+  border-top: 1px solid #e8edf5;
+}
+
+.toc-link {
+  display: block;
+  padding: 10px 0;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.35;
+  color: #142033;
+  transition: color 0.15s ease;
+}
+
+.toc-link:hover,
+.toc-link:focus-visible {
+  color: #183b72;
+  outline: none;
+}
+
+.steps {
+  display: grid;
+  gap: 12px;
+}
+
+.step-card {
+  background: #ffffff;
+  border: 1px solid #dbe2ee;
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: 0 8px 18px rgba(20, 32, 51, 0.04);
+}
+
+.step-heading {
+  margin-bottom: 10px;
+}
+
+.step-head-copy h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.24;
+  letter-spacing: -0.03em;
+  color: #0f172a;
+}
+
+.step-card p {
+  margin: 0;
+  color: #334155;
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.step-card p + p {
+  margin-top: 12px;
+}
+
+.inline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0.08rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: #eef4ff;
+  border: 1px solid #c9daf9;
+  color: #183b72;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.inline-link::after {
+  content: "↗";
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+.inline-link:hover,
+.inline-link:focus-visible {
+  background: #e5efff;
+  border-color: #aac5f2;
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.back-link {
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid #e8edf5;
+}
+
+.back-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid #dbe2ee;
+  background: #fbfcfe;
+  color: #334155;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.back-link a::before {
+  content: "↑";
+  line-height: 1;
+}
+
+@media (max-width: 720px) {
+  .investing-shell {
+    width: min(100% - 20px, 860px);
+    padding-top: 16px;
+  }
+
+  .hero,
+  .contents-card,
+  .step-card {
+    border-radius: 16px;
+    padding: 16px;
+  }
+
+  .inline-link {
+    white-space: normal;
+  }
+}
+</style>
+</head>
+<body class="investing-page">
+<div class="investing-shell" id="top">
+<header class="topbar">
+<a class="brand" href="../">tanzthenightaway</a>
+<nav aria-label="Site navigation" class="topnav">
+<a href="../">Home</a>
+<a aria-current="page" href="./">Investing</a>
+<a href="../interview-guide/">Interview guide</a>
+</nav>
+</header>
+<main>
+<section class="hero">
+<h1>Notes on financial independence</h1>
+</section>
+<section aria-labelledby="contents-title" class="contents-card">
+<h2 id="contents-title">Contents</h2>
+<ol class="contents-list">
+<li>
+<a class="toc-link" href="#step-1">Step 1: Super contributions and salary sacrifice</a>
+</li>
+<li>
+<a class="toc-link" href="#step-2">Step 2: Calculate your true weekly income</a>
+</li>
+<li>
+<a class="toc-link" href="#step-3">Step 3: Build a recurring expenses account</a>
+</li>
+<li>
+<a class="toc-link" href="#step-4">Step 4: Separate variable recurring costs</a>
+</li>
+<li>
+<a class="toc-link" href="#step-5">Step 5: Plan for large 10-year purchases</a>
+</li>
+<li>
+<a class="toc-link" href="#step-6">Step 6: Automate transfers and split the surplus</a>
+</li>
+<li>
+<a class="toc-link" href="#step-7">Step 7: Build an emergency fund first</a>
+</li>
+<li>
+<a class="toc-link" href="#step-8">Step 8: Start investing in sensible chunks</a>
+</li>
+<li>
+<a class="toc-link" href="#step-9">Step 9: Choose your growth and stability mix</a>
+</li>
+<li>
+<a class="toc-link" href="#step-10">Step 10: Build your ETF mix</a>
+</li>
+<li>
+<a class="toc-link" href="#step-11">Step 11: Use super strategically</a>
+</li>
+<li>
+<a class="toc-link" href="#step-12">Step 12: Rebalance with new contributions</a>
+</li>
+<li>
+<a class="toc-link" href="#step-13">Step 13: Work towards your retirement number</a>
+</li>
+<li>
+<a class="toc-link" href="#step-14">Step 14: Sell to fund retirement</a>
+</li>
+<li>
+<a class="toc-link" href="#step-15">Step 15: Make sure enough sits outside super</a>
+</li>
+<li>
+<a class="toc-link" href="#step-16">Step 16: Enjoy</a>
+</li>
+</ol>
+</section>
+<section aria-label="Investing steps" class="steps">
+<article class="step-card" id="step-1">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 1: Super contributions and salary sacrifice</h2>
+</div>
+</div>
+<p>Consider doing pre-tax additional payments into super and salary sacrifice payments to fringe benefits account (e.g. remserv). There may be some situations where putting additional money into super is not beneficial, such as if your super balance is already very healthy, and you want to invest more money outside super so you can retire earlier. But usually it is a good idea to maximise pre-tax contributions. See <a class="inline-link" href="https://passiveinvestingaustralia.com/how-much-to-save-inside-vs-outside-super/" rel="noopener noreferrer" target="_blank">how much to save inside vs outside super</a> Choose a super fund that has low fees, passive index options, and the right options for investing. <a class="inline-link" href="https://passiveinvestingaustralia.com/how-to-invest-your-super/" rel="noopener noreferrer" target="_blank">how to invest your super</a></p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+<article class="step-card" id="step-2">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 2: Calculate your true weekly income</h2>
+</div>
+</div>
+<p>Work out weekly income, after tax, super contributions, and after salary sacrifice (e.g. remserv) payment. Any tax return money can be treated as bonus. Payments like tax returns or salary sacrifice should never be included in weekly income. These can be used for extra investing or topping up of accounts at end of year (e.g. bills account or 10 year savings account).</p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+<article class="step-card" id="step-3">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 3: Build a recurring expenses account</h2>
+</div>
+</div>
+<p>All recurring expenses should be calculated. This includes any expense that recurs on a regular basis. Including weekly (e.g. transport costs), monthly (e.g. phone, internet, haircuts), yearly (gifts, medical appointments, regular hobbies, events) or multi-yearly (e.g. passport, drivers license). This includes not just bills but also discretionary spending that recurs where there is a predictable amount of spending each year. Even though it is discretionary, it is better to keep these expenses in this account as it controls your recurring spending in a much more predictable way, which is important for financial stability. It is a good idea to slightly overestimate how much you need to spend so that you have extra cash gradually building in this account and are covered if one expense is significantly more than you expected. Convert this to a weekly amount, and transfer that amount on the day you are paid to a specific debit card account used for these expenses only. The amount that each item costs should be updated each year. Choose an account that has good bonus interest, such as ING or ubank.</p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+<article class="step-card" id="step-4">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 4: Separate variable recurring costs</h2>
+</div>
+</div>
+<p>Other recurring expenses where the amounts may vary greatly, such as yearly holidays, can be portioned into a separate account so that it is easier to keep track of how much is available before spending. Other emergency expenses that are inevitable but where the timing is unknown, e.g. pet emergencies, or where portioning money is preferable to paying for weekly insurance (e.g. pet insurance) may also be better off in a separate account. Keep in mind that you may not receive bonus interest in these accounts if they do not meet the requirements for high interest, so if you want bonus interest, you can put this money in a bills account and keep track of the available amounts in a spreadsheet instead. The amount transferred to these accounts should be updated by 2% each year to account for inflation.</p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+<article class="step-card" id="step-5">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 5: Plan for large 10-year purchases</h2>
+</div>
+</div>
+<p>Some expenses may be either once off or rare expenses (e.g. house deposit, wedding, medical procedures), or recurring but very expensive (e.g. new cars, renovations, furniture). These should be portioned into another separate savings account. While these may still be considered 'bills' or 'discretionary' spending, these are generally wants rather than needs, and are items that require a long period of planning and saving to purchase without upsetting your day-to-day financial stability. These are also items that threaten to destabilise investing in your long-term future. For example, if you want to put a deposit on a house in the next 5 years, but invest all of your money instead of portioning it aside, your investments could be down right when you plan to use the money. Planning ahead and portioning the money aside means you can still make the purchase without being forced to sell your investments at the worst moment and potentially delay your retirement date significantly. It also means you can continue to invest for the long-term future while you save, maximising your exposure to the stock market in the meantime. Long story short, the stock market generally falls and recovers roughly every 7-10 years, so it is best to plan ahead by roughly 7 -10 years for these purchases. Any shorter is risky and any longer is unnecessary. If you need more than 10 years to save for something, you should reconsider if you can afford it.</p>
+<p>Work out all of the very expensive things you want to spend in the next 10 years, and convert the amount to a weekly value. E.g. if in the next 10 years you want to spend on a house deposit for 100k, and a new car for 50k, the total 10 year amount saved should be 150k, divide it by 10 years - 15k per year, and divide it by 52 weeks = $288 per week. Transfer this money each week into a high interest savings account such as ING or ubank. Only ever use this account for these expenses. Update the values each year by 2% to account for inflation, or update if the expected cost changes. Each year, consider if there are any new big items you may want to purchase in the next 10 years, and update this. Items that may become bills but are too expensive to afford for current income e.g. high school fees, might be better off planned for in this account than in the bills account.</p>
+<p>You do not need to wait 10 years to purchase all items, but you will need consider that purchasing one big item may mean you need to wait for others. If you purchase an item earlier than expected, you should continue to portion money aside for it for the 10 planned years. For example, if you are saving for the house deposit and the car, and 5 years have passed, you have now saved 75k. You can now decide to either purchase the car now, and wait 5 years to purchase the house, or wait 1 - 2 years to purchase the house, and purchase the car in 5 years. For this reason, you should continue to pay the full 10 years for the item, even if you purchase it earlier than 10 years. If you decide to buy the car at 5 years because you have enough money, but then stop transferring money for the car, then you will no longer have enough money to purchase the house in 5 years, because you have only contributed 25K towards the car so far, and still have 5 years of payments remaining. Once the item is fully 'paid off' after 10 years, then it can be removed from the calculations. Update the 'years remaining' section of the 10 year spreadsheet to keep track of this, as well as how much you have roughly saved for each item, each year.</p>
+<p>If this money is saved in a high-interest savings account, it will accrue significant interest over the years. You should treat this simply as bonus money that helps account for additional unexpected inflation. But remember that this interest is counted as income and you will need to pay tax on this at the end of financial year. The longer you wait to make the large purchases, the more the interest will accrue and the more bonus money you will have, ultimately allowing you to be ahead of schedule on your large planned purchases and have room to save a little more if needed before the 10 years expires. If you own property, this account is better placed in the mortgage offset account. It won't accrue interest, but it will reduce the interest repayments on the mortgage, which is even better.</p>
+<p>The Australian government guarantees up to 250k safety limit per bank, so if for whatever reason this amount was to go above 250k, it is better to split it across multiple banks, in case a bank goes bankrupt.</p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+<article class="step-card" id="step-6">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 6: Automate transfers and split the surplus</h2>
+</div>
+</div>
+<p>Each week, your pay goes into your bank account, and the set amounts from the above are transferred out into separate accounts for recurring expenses and 10-year savings. You can now feel safe that you will always have enough money for your expenses and for your medium-term goals, and are free to use the rest towards discretionary spending and long-term investing without worrying about needing to limit your spending money and questioning whether you can afford every purchase as most people do. This in itself reduces financial stress.</p>
+<p>As a general rule to balance investing in the long-term future and still living an enjoyable life within your means, two thirds of this remaining amount should go towards investing, and one-third towards free spending. This is just a guide and may need to change based on your income and how aggressively you want to invest in your retirement. However, if you reach this step and find that there is not enough money left to live comfortably on the remaining one-third, you should first reconsider living more within your means and cutting back on your expenses and 10-year goals, before cutting back on your investing and sacrificing your long term financial stability. There may also be short periods where you are unable to invest due to a spike in expenses, e.g. if you purchase a home after saving for 7 years, but still need to finish 'paying off' the deposit in your 10 year account for the next 3 years, but also now have a mortgage and home expenses, money is likely to be tight for those 3 years.</p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+<article class="step-card" id="step-7">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 7: Build an emergency fund first</h2>
+</div>
+</div>
+<p>Before investing the remaining two-thirds, you should first use this two-thirds to build an emergency fund. The emergency fund should be roughly 6 months of basic recurring expenses. If you were to lose your job, or become very ill and could not work, or lost your income for whatever reason, you do not want to sell investments to cover expenses, as for the same reasons as the 10 year account, if the market drops right as you need the money, you solidfy losses that will compound and significantly slow down your long term investments. This should not be treated as an account for 'emergency expenses' unless it is a very last resort. In case of emergency, the emergency fund can be used as replacement income, to give you time to live life as usual, to continue paying your basic bills, portioning money for 10-years, and investing, until you find a new job, or get back on your feet. This should be kept in a low-maintenance high interest savings account such as ubank. It can also be kept in the offset account to lower your mortgage interest, but you should keep track of how much is portioned to the emergency fund. If the emergency fund is used for whatever reason, it should be replenished before you continue investing.</p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+<article class="step-card" id="step-8">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 8: Start investing in sensible chunks</h2>
+</div>
+</div>
+<p>Once you have an emergency fund, you can begin investing money. it is generally best to invest in $5,000 chunks to save money on brokerage, but there are calculators available if you want to optimise the timing of investments <a class="inline-link" href="https://investcalc.github.io/" rel="noopener noreferrer" target="_blank">investment frequency calculator</a> The simplest way is to check each month if you have $5k, and if you do, invest it.</p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+<article class="step-card" id="step-9">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 9: Choose your growth and stability mix</h2>
+</div>
+</div>
+<p>The first thing to consider, before deciding which stocks to invest in, is your fixed-income to stocks ratio, or stocks/bonds asset allocation. What this really means is the balance between growth and stability. Shares are volatile but have a high expected long-term return and are the thing that grows your wealth. Fixed income (bonds and cash) are steady and grow slowly. Their job is to reduce volatility. How much you allocate towards growth, and stability, depends on your ability to take on risk, need to take on risk, and your willingness to take on risk. See <a class="inline-link" href="https://passiveinvestingaustralia.com/asset-allocation-and-your-risk-tolerance/" rel="noopener noreferrer" target="_blank">asset allocation and risk tolerance</a></p>
+<p>There are many factors that influence the ratio, but the largest is how close you are to retirement. When you are young, your main goal is to build wealth, so it is generally better to have mostly stocks. When you are close to retirement, you do not want to risk losing millions of dollars in a stock market crash right before you plan to retire, or worse right after you retire, so you need to have a level of stability. There are many ways to balance this allocation, but one of the most simple that ensures growth while having a reasonable protection by age 60 is age - 20. Each year, as you age you increase your fixed-income allocation by 1%, until you retire. Once you retire, it's a bit more complicated. You can keep this fixed, or you can keep increasing the stability allocation. Arguably as you have less years of life expectancy, your willingness and ability to take on risk is very high, because you don't need your portfolio to last decades. So ironically you can be more risky and reduce your bonds/cash allocation as you get much older. For this reason, some people increase by 1% per year until 60, and then reduce by 1% per year thereafter. This approach would mean you hit 40% at age 60, and then head towards being back to 100% stocks by age 100.</p>
+<p>When you are starting out, you need cash for spending, bills, saving, and an emergency fund, so you will generally be over-allocated to cash for a long time, until your stock portfolio and super annuation really take off. However, eventually, you will need to start putting money aside in cash or invest in bonds, to maintain your safe asset allocation. If you don't own property, and are a long way from retirement, you can put this extra cash in your 10-year savings account, to boost your savings and bring your medium-term goals closer. A note here that, of course, if you make a big purchase from this 10-year account, your total cash amount will go down significantly. Meaning that you will likely be under-allocated to cash for a while, meaning you will simply replenish this account quickly right after a purchase instead of investing. It's important you don't treat this as bonus money and start buying expensive things you did not plan for, you still need to plan for your 10 year purchases and portion money. It does mean, however, that after around 10 years or so, you will naturally reach a point where you have more cash than you ever need for bills, emergency, and 10-year goals at all times simply to meet the cash allocation requirement of your portfolio.</p>
+<p>If you own a home, you can put this money in your offset account, to reduce your mortgage repayments. Once you are approaching retirement, or retired, and no longer have a significant mortgage, you can start investing in bonds instead, because they have a slightly higher return than cash over time. Long story short, there are lots of bonds, but the best is to invest in Australian government bonds. See <a class="inline-link" href="https://passiveinvestingaustralia.com/bond-funds/" rel="noopener noreferrer" target="_blank">bond funds</a> It is also generally best to invest your bonds inside super, rather than outside. This is because they have a high tax drag, and in super they are (mostly) tax free. It is also very easy to adjust your bond allocation in seconds in super without needing to pay tax on selling/buying bonds to rebalance outside super. So you can control your overall portfolio risk very quickly and easily inside your super fund if you keep your bonds inside. See also cash vs bonds: <a class="inline-link" href="https://passiveinvestingaustralia.com/cash-vs-bonds-in-your-portfolio/" rel="noopener noreferrer" target="_blank">cash vs bonds in your portfolio</a></p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+<article class="step-card" id="step-10">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 10: Build your ETF mix</h2>
+</div>
+</div>
+<p>For the stocks portion, choosing what to invest in is a big topic, but I choose to invest in broad market index ETFs (read <a class="inline-link" href="https://passiveinvestingaustralia.com/" rel="noopener noreferrer" target="_blank">Passive Investing Australia</a> for why). This requires no maintenance on your behalf whatsoever, is free from human intervention, and outperforms 90% of professional investors (most of those 10% are just lucky). I invest in roughly same proportions of the vanguard product VDHG, which is an index ETF designed to capture the average return of the global economy, optimised for Australian investors and the Australian dollar. You can keep it simple and just invest in one product, which is VDHG, but it is better to invest in the individual components separately, because it is cheaper, more tax efficient, and by investing in the product that is the lowest, or most out of whack in your portfolio each month, you also get a neat side effect of buying the funds generally when they drop in price, and avoid buying funds that have recently surged in price. In retirement this also means you can sell down the investments that are overperforming, which allows you to balance your portfolio by buying (before retirement) and selling (in retirement) the individual component that is most out-of-whack with your goal allocations, instead of 'rebalancing' the whole portfolio every 6- 12 months, which costs a lot of money over time in tax. Investing separately into each product also allows you to tailor your fixed income (e.g. cash and bonds) portion more easily, as the VDHG product already contains 10% bonds which you can't individually buy and sell. See <a class="inline-link" href="https://passiveinvestingaustralia.com/vdhg-or-roll-your-own/" rel="noopener noreferrer" target="_blank">VDHG or roll your own</a> and <a class="inline-link" href="https://passiveinvestingaustralia.com/portfolio-maintenance-rebalancing/" rel="noopener noreferrer" target="_blank">portfolio maintenance and rebalancing</a></p>
+<p>The VDHG allocations for the stock portfolio are: 40% Australian stocks (VAS), 30% global unhedged stocks in foreign currency (VGS), 17.5% global hedged-to-AUD stocks (VGAD) this is the same as VGS but is in AUD, 7% small companies (VISM), and 5.5% emerging markets (VGE). There are some caveats - first, many people believe that 40% Australian stocks is too high, as Australia is only 3% of the global economy, and your income, cash, bonds, assets, and very expensive home are already tied to the AUD. So if the Australian economy was to go kaput, your options for realising your wealth and moving overseas are limited if a large portion of your portfolio is also in AUD. On the flip side, being invested in VAS, due to its volatility and something called franking credits might theoretically result in more growth, though it's heavily debated if this is actually the case. For this reason, I chose to start at 40% VAS as a baseline, but each year, reduce this by 1% and replace it with the 1% yearly increase in cash or bonds. Because the cash and bonds are also in AUD, this maintains the currency balance of the portfolio, slowly increases the stability while exposing me to the possible benefits of VAS while I am young, but slowly reduces the concentration risk of being over-invested in the Australian economy as my net worth grows. E.g. at age 20: 40% VAS, 0% cash/bonds, age 30: 30% VAS, 10% cash and bonds, and so forth. This would mean that by age 60, theoretically I would have 40% cash/bonds and 0% VAS. I'm not set on this but it's what I am doing for now. Maybe from age 60 as I reduce the cash/bonds allocation by 1% per year, I could restore the VAS component by 1% per year, ending back at 0% cash/bonds and 40% VAS by age 100. See <a class="inline-link" href="https://passiveinvestingaustralia.com/why-not-just-invest-everything-in-the-australian-market/" rel="noopener noreferrer" target="_blank">why not invest everything in the Australian market</a></p>
+<p>The second caveat is a balance between complexity and simplicity. While investing in the individual components of VDHG is generally much better, it means you need to eventually balance 7 things: VGS, VAS, VGAD, VISM, VGE, VAF (bonds), and cash. This might be too complicated. The first thing you can do to simplify is to ignore the 7% VISM and 5.5% VGE component, and instead invest in an extra 12.5% of VGS. These are both global international funds, so the solution is to invest in 42.5% of VGS instead of 30%. Theoretically you will get a higher return keeping VISM and VGE, but it's minimal and doing VGS instead is totally fine. <a class="inline-link" href="https://passiveinvestingaustralia.com/emerging-markets-is-crap-should-i-leave-it-out/" rel="noopener noreferrer" target="_blank">emerging markets</a> and <a class="inline-link" href="https://passiveinvestingaustralia.com/whats-the-deal-with-small-caps/" rel="noopener noreferrer" target="_blank">small caps</a> Alternatively, given these two funds are the highest risk of the portfolio, if you wanted to increase your risk for whatever reason - e.g. invest in bitcoin or cryptocurrency or an area of interest, this would be the allocation to replace. You need to consider your need and willingness to take on risk before doing this.</p>
+<p>The next thing you can do to simplify is to replace the VGAD component with more VGS and VAS. VDHG is just VGS in Australian dollars to balance your currency risk. So let's say you have left out VISM and VGE, you are 40 years old, and your portfolio goal is 20% cash, 20% VAS, 42.5% VGS, and 17.5% VDHG. You have 57.5% in Aus dollars, and 42.5% in international currency (this is the general recommended balance or 60/40). You can instead aim for 20% cash, 40% VAS, 40% VGS. You're going to get 90% of the same returns, be protected enough against currency risk, and it's going to be a lot simpler to think about and manage. Of course, I want that extra 10% so I'm fine with slightly more complicated. To simplify even further, you can just buy one product, VDHG, but because of the trickiness of balancing the fixed-income proportion, it's arguably more complicated (and expensive) than just a cash/VGS/VAS portfolio.</p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+<article class="step-card" id="step-11">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 11: Use super strategically</h2>
+</div>
+</div>
+<p>Before investing, there is one more consideration, which is how to handle superannuation in your allocations. There are two main options, one is to treat your portfolio inside and outside super separately, and balance them individually. This is easy to think about as you can just set your super allocation to exactly what your goal allocation is and update it every year. The downside, is you can't use the tax free environment to optimise your returns. The other option is to consider your entire net worth in your portfolio calculations, and use your super strategically by putting the least-tax efficient funds in the most tax advantaged account.</p>
+<p>The growth that bonds see is mostly just interest income, and interest is taxed each year at your marginal tax rate, so you save a lot of tax by having bonds inside super. As above, it's also a very easy way to control the stability of your portfolio. For complicated reasons, hedged funds like VGAD are also less tax efficient, due to fluctuations in currency, although vanguard recently made a change to reduce this slightly <a class="inline-link" href="https://fund-docs.vanguard.com/AU-Unitholder_notice-Important_information_regarding_Taxation_of_Financial_Arrangements-VGAD.pdf" rel="noopener noreferrer" target="_blank">Vanguard note on VGAD taxation</a> so you can also save on tax by holding VGAD inside super instead of outside super. It will sometimes be called 'International (hedged)'.</p>
+<p>Therefore, to get the tax advantages of super, you generally want to consider your portfolio allocation as a whole, and first hold your bond and VGAD allocation inside super. This won't take up all of your super, so you can invest the remaining of super in any combination of VAS or VGS. Until recently Q super did not offer an unhedged global fund like VGS, but they do now. VISM and VGE are not possible to invest inside super without doing a self-managed fund (not worth it with my strategy). So generally your super will be a combination of bonds, VGAD, VAS and VGS. And outside super will be VGS, VAS, VISM, VGE, and cash. If your outside super balance greatly outpaces the super balance, you may need to eventually invest in VGAD outside super to maintain portfolio balance, but this is very unlikely (outside super would have to be 5x your super balance).</p>
+<p>The obvious flaw of splitting your investments across super and outside super, is that you can't access super until you are 60, however it is free and very simple to change your super allocations at anytime to rebalance your portfolio. For example, let's say you have retired in your 50s, so you don't have access to income from your super yet, and you do your spreadsheet calculations, and VGAD is the thing that is most out-of-whack on your portfolio, so this month you want to sell VGAD for your income. You don't own VGAD outside super so you can't 'sell' it. However, instead, you can sell VGS outside super, and inside super, reallocate some of your VGAD allocation to VGS. In this scenario you have effectively sold VGAD instead to rebalance your portfolio. A reminder that if this is all too complicated, just hold 50/50 VAS and VGS inside and outside super, and you'll be fine.</p>
+<p>A major valid consideration, though, is that the component outside your super may be more volatile, if your stability assets (bonds) are all inside super. After all you can't access super until age 60 and so you do need the money outside super to last you at least until you hit 60. This is not as much of a problem as you might think. Given the cost of housing in Australia, it is very unlikely to have a fully paid off home before 60 while also retiring early. In most cases, it is best to pay off the remainder of your mortgage once you hit 60 and access your super. Until then, holding your stability allocation in cash in the offset account is superior in almost every way to holding bonds inside super. So while you have a mortgage, the majority of your safe assets will be cash in an offset account outside super. You can choose to pay off the mortgage first before you invest (this is what Barefoot investor advises for the average person) but this is a much slower strategy to retirement, even if it is simple see: <a class="inline-link" href="https://passiveinvestingaustralia.com/pay-off-the-mortgage-faster-or-invest/" rel="noopener noreferrer" target="_blank">pay off the mortgage faster or invest</a> Instead, focus on growing your stock portfolio until it pays your mortgage for you, and keep your safe assets in the offset to reduce the repayments, then pay off the rest of your mortgage when you get your super. Holding a mortgage as long as possible also gives several advantages such as having access to an offset account, or being able to redraw on the mortgage and invest in stocks but claim it as a tax-deduction. See <a class="inline-link" href="https://passiveinvestingaustralia.com/debt-recycling/" rel="noopener noreferrer" target="_blank">debt recycling</a></p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+<article class="step-card" id="step-12">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 12: Rebalance with new contributions</h2>
+</div>
+</div>
+<p>Now that you have decided on your asset allocation and where to keep your funds, fill out your spreadsheet each month with the worth of the individual components. You can balance your portfolio by buying the fund that is most under-weighted in your portfolio. If it is VAS, VGS, VISM or VGE, you can buy these directly with your $5k. If it is VGAD, you can readjust your super allocation until it is something else, then buy the something else. If it is cash/bonds, then you can put your 5k in your 10-year savings, offset, or increase your allocation of bonds inside your super. For every new fund, always go to computer share and opt into dividend reinvestments. Each quarter, the funds will pay out dividends (technically called distributions for index ETFs), you can have these go to your bank account, or be reinvested. You need to pay tax on these as they are treated as income. Once you have retired, you can opt out of the reinvestment and have the cash hit your account every quarter instead so that you need to sell less to fund your retirement.</p>
+<p>When filling out your allocations, make sure you check your cash and bond values are correct, that the formulas that calculate your individual components accurately reflect your superannuation allocations. E.g. if you have 10% bonds in your super, make sure that the formula for cash and bonds includes your superannuation value * 0.1.</p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+<article class="step-card" id="step-13">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 13: Work towards your retirement number</h2>
+</div>
+</div>
+<p>The ultimate goal is to rinse and repeat the above, until you have a portfolio that is big enough to cover all of your living expenses. Then you no longer need to work. Of course you may choose to work, or you may choose to do a slow transition through part-time work. The point is you can do whatever you want. The amount you need to retire depends greatly on your expenses and lifestyle, so you need to think carefully about what your life looks like when you stop working. Most people spend less money than they do while working. The Australian standard for a comfortable retirement for a couple is a paid off home and an annual spend of 75K per year (call it 80k). Note that the pension for a couple is 46k, so 80k is a decent starting point for comfortable for most people. Being very self-aware and living a simple life is helpful, as it helps you cut back aggressively on things you don't need, and let's you spend very aggressively on things that make you happy. The goal, afterall, is not so much to stop working, but to be able to spend that time doing more important things or pursuing new things without worrying about money. Many of the famous early retirers began new careers and ended up making a lot more money incidentally because they didn't need to worry about failure.</p>
+<p>The gold standard withdrawal rate is 4% of your portfolio, per year. There are 100 different withdrawal strategies, and 100 different opinions on which is best. The one that makes the most sense to me is a 'variable 4% withdrawal'. This means every year, you withdraw 4% of your total portfolio value for spending, relative to the value of your portfolio that year. So if you have 1 million, you withdraw $40,000. This is best done in Quarters, so that you can factor in your income from distributions. There are 4 quarters per year, so every quarter you spend 1% of the value of your portfolio, minus the distributions you already received. If the next year you have $1.1 million, you withdraw $44,000, or $11,000 every quarter. This naturally builds in inflation into your spending, allows you to spend more and enjoy your life if the markets are doing well, and prevents you from overspending and ruining your retirement if the market drops. You do however need to calculate how much of a market drop you can afford with this strategy, and allocate a sensible amount to cash and bonds, or have a back up plan such as returning to work if needed or downsizing your home. On average, a 4% variable withdrawal will result in a massively larger portfolio and increased spending capacity over time, but can be a bit tight in the beginning if you get really unlucky with a bad market right after you retire. If you get unlucky with a huge market drop right after you retire, and your variable 4% income becomes too little to continue being retired, this is totally fine, because you can reenter the workforce, even part time, if you really need to while you are still young and very qualified to cover the difficult period, and hopefully have better luck when you try again once the markets recover. If you hope it gets better and it doesnt and you wait 10 years to realise you made a huge mistake and overspent, it becomes more difficult to return to (especially well-paying) work, and you will never recover the losses from overspending.</p>
+<p>If your goal in retirement is a paid off house, and 80k spend per year for a couple, then based on a 4% variable withdrawal strategy, you want to retire with a paid off home and a $2 million portfolio. Its easy if you retire later than 60, e.g. if your loan was $1million at 35, when you turn 60 you likely have about $300,000 left on the mortgage. So you need to have a total of $2.3 million. You retire, access your super, take $300,000 from super and pay off mortgage, and have 2 million remaining to live on 80k per year. Prior to 60 it's a bit trickier, because you are going to need to pay your mortgage, and have your portfolio outside super cover the mortgage until you reach 60. You can pay off your mortgage before you turn 60 of course, but you will need to pay a fair bit of tax selling investments outside super, so this generally isn't advisable. You can pay off the mortgage as fast as possible, barefoot style, but you will miss out on decades of stock market returns. So usually the best approach is to pay the minimum on the mortgage and build the stock portfolio until your portfolio covers your living costs and your mortgage repayments.</p>
+<p>At this stage, you don't need to have bonds inside super yet, and all of your stability assets are cash in your offset account, which reduce your mortgage repayments. In a similar scenario, if you take a $1M mortgage at 35 and retire at 50, you will likely have around $700,000 remaining on the mortgage. However, at age 50, you will also have a safe asset allocation of 30% using the age-20 rule. And, as established, your safe asset cash is sitting in your offset, which gradually reduces your mortgage repayments over time. So the true value of the remaining mortgage is likely going to be lower than $700k, and if you had a portfolio of $2 million at this time, you would have around $600,000 in safe-asset allocations, the majority of which is cash in your offset account. This is liquid cash that reduces your mortgage repayments significantly, and you can also use this amount to pay off your mortgage over the following 10 years. It might be tempting to just use this cash to pay off the mortgage, but then you are without any safe assets outside super, and if the market tanks your investments outside super are highly exposed to the stock market. Keeping it in the offset to reduce the interest and paying it off slowly over time is a much safer bet and maintains access to the benefits of the home loan. There are alternatives, such as, let's say once you have a big enough portfolio to live comfortably (2M) but not enough to cover the mortgage too (3M), you could drop to part time work (or one person can retire and one can keep working for a while) to earn just enough money to cover the mortgage repayments only, and live off the rest of your portfolio.This is a nice way to dip your toes into retirement without it being too scary or needing to wait until you have another million saved before you cut back on work.</p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+<article class="step-card" id="step-14">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 14: Sell to fund retirement</h2>
+</div>
+</div>
+<p>When you retire, you will still need to calculate expenses and put money aside, you will still need to plan for larger 10-year purchases and put money aside, and you will still need to fill out a spreadsheet with your target allocations. The only difference is instead of buying the component that is the lowest, instead you now sell the component that is highest.</p>
+<p>Before you turn 60, first, you will receive distributions for the quarter, which hit your account in cash once you opt out of dividend reinvestment. The distributions of the funds in this approach usually sit around 2-3% per year, meaning to reach your 4%, you only need to sell around 1-2% per year of your shares. You should do this every quarter, calculating how much of the distributions were of your whole portfolio, then selling the highest component in your spreadsheet to hit 1% each quarter. For example, if you have a $2 million portfolio, you can withdraw $80k per year. That's 20k per quarter. In Q1, you receive $10k in distributions which are deposited directly in your account. You then do your spreadsheet, and see that VGS is the component that is the highest, most out-of-whack one in your portfolio. You then sell 10k of VGS.</p>
+<p>Once you turn 60, you are mandated by law to withdraw a set amount of money from your superannuation. It begins at 4% of your super balance and increases with age. In the beginning, distributions and forced withdrawals will likely cover most of your spending money. Over time, you will end up withdrawing more from super than you would like. At this stage, you can either keep it as cash outside super, and remove bonds from your super portfolio to rebalance, or, you can opt back into dividend reinvestments and begin investing the excess money outside super again so that you are only spending 4%. As long as you have 20+ years to live, it is very important to continue to only spend 4% of your total portfolio, even if the government forces you to withdraw much more from super.</p>
+<p>A nice benefit of this approach is that you pay very little tax. Because of the capital gains discount, you only pay income tax on 50% of the profit you made on the share. So if as a couple you spend 80k per year in retirement, this is spread as approximately 40k each, but you dont pay tax on the whole 40k, only the value that the share has grown by since you bought it, plus a 50% discount. Even if the shares you are selling have quadrupled since you bought them (let's say 30k in profit when you sell them), you get the CGT discount, and will only pay tax on 15k of it, which is under the tax-free threshold, and therefore you pay no tax. Any income derived from super is also tax free. Of course the policy may change over time. New Zealand have no capital gains tax, but every 10 years in Australia someone seems to campaign on removing the CGT discount.</p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+<article class="step-card" id="step-15">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 15: Make sure enough sits outside super</h2>
+</div>
+</div>
+<p>One last thing to consider is how much of the portfolio is inside super vs outside super. Even if the overall portfolio size is large enough to retire, if the majority is inside super, then there may not be enough money outside super to last until age 60. You first need the total portfolio to be large enough where 4% of the total can cover living expenses, but you also have to use only the outside super portion until you turn 60. The balance required will therefore vary depending on the planned age of retirement, and the balance of stocks and bonds. As a general rule, based on the trinity study, as long as the timeline is not longer than 15 years, and you begin with greater worth outside super than inside super, the balance is very likely to last until aged 60. If you think you are approaching a total portfolio number that allows retirement, but your super balance dwarfs your investments outside super, this is when it may be a good time to stop making voluntary contributions to super and focus on increasing your outside super portion so that you can last until age 60.</p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+<article class="step-card" id="step-16">
+<div class="step-heading">
+<div class="step-head-copy">
+<h2>Step 16: Enjoy</h2>
+</div>
+</div>
+<p class="celebrate">☀️🍹</p><p>Enjoy.</p>
+<p class="back-link"><a href="#top">Back to top</a></p>
+</article>
+</section>
+</main>
+</div>
+</body>
+</html>
